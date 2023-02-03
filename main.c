@@ -218,20 +218,6 @@ int main()
             v=0;
             al_draw_bitmap(bitmap2, 0, 0, 0);
             al_draw_text(font1, al_map_rgb(255,255,255),50,655,0,"Put your soldiers at one of your land.");
-            printf("*\n");
-            printf("land=%d\n",land);
-            printf("red=%d,blue=%d,yellow=%d,green=%d",red,blue,yellow,green);
-
-            //1111111111111111111111111111111 debug the turn:
-            if (Turn_counter==RED)
-                printf("\nRED\n");
-            else if (Turn_counter==BLUE)
-                printf("\nBLUE\n");
-            else if (Turn_counter==YELLOW)
-                printf("\nYELLOW\n");
-            else if (Turn_counter==GREEN)
-                printf("\nGREEN\n");
-            //11111111111111111111111111111111111111111111111
         }
         DoIt=1;
 
@@ -337,20 +323,21 @@ int main()
                 }
                 else if (mouse_state.buttons == 1 && x >= 985 && x <= 1165)
                 {
-                    if (y >= 35 && y <= 110) {
+                    if (y >= 35 && y <= 110)
                         land = 25;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 26;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 27;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 28;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
+
                 if (land!=-1)
                 {
                     if (check_land_is_correct(land,turn)==1)
@@ -368,11 +355,12 @@ int main()
                         else if (Land_player[land]==GREEN)
                             green++;
                     }
-
-
+                    else
+                    {
+                        primary_whose_turn_is_it(turn);
+                        al_flip_display();
+                    }
                 }
-
-
 
                 Draw_Land_Boarder(land);
                 soldier_display();
@@ -391,7 +379,7 @@ int main()
         }
         //////////////////////////////////////////////////////////////  works as land selection
 
-        //99999999999999999999999999999999999999999999999999999
+        //9999999999999999999999999999999999999999999999999999999999999999999999999999999999999
         if (primary_numbers==2)   // this part ends the loop
         {
             if (red==red_capacity && blue==blue_capacity)
@@ -407,7 +395,7 @@ int main()
             if (red==red_capacity && blue==blue_capacity && yellow==yellow_capacity && green==green_capacity)
                 break;
         }
-        //999999999999999999999999999999999999999999999999999999
+        //99999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 
 
         if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
