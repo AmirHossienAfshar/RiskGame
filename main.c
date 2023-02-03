@@ -478,22 +478,21 @@ int main()
                 {
                     if (y >= 35 && y <= 110)
                         land = 0;
-
-                    else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 1;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 2;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 3;
-                    } else if (y >= 375 && y <= 450) {
+                    else if (y >= 375 && y <= 450)
                         land = 4;
-                    } else if (y >= 460 && y <= 535) {
+                    else if (y >= 460 && y <= 535)
                         land = 5;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
                 else if (mouse_state.buttons == 1 && x >= 225 && x <= 405)
                 {
@@ -503,84 +502,85 @@ int main()
                         land = 7;
                     else if (y >= 460 && y <= 535)
                         land = 8;
-                    else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
                 else if (mouse_state.buttons == 1 && x >= 415 && x <= 595)
                 {
-                    if (y >= 35 && y <= 110) {
+                    if (y >= 35 && y <= 110)
                         land = 9;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 10;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 11;
-                    } else if (y >= 375 && y <= 450) {
+                    else if (y >= 375 && y <= 450)
                         land = 12;
-                    } else if (y >= 460 && y <= 535) {
+                    else if (y >= 460 && y <= 535)
                         land = 13;
-                    } else if (y >= 545 && y <= 620) {
+                    else if (y >= 545 && y <= 620)
                         land = 14;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
                 else if (mouse_state.buttons == 1 && x >= 605 && x <= 785)
                 {
-                    if (y >= 35 && y <= 110) {
+                    if (y >= 35 && y <= 110)
                         land = 15;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 16;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 17;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 18;
-                    } else if (y >= 375 && y <= 450) {
+                    else if (y >= 375 && y <= 450)
                         land = 19;
-                    } else if (y >= 460 && y <= 535) {
+                    else if (y >= 460 && y <= 535)
                         land = 20;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
                 else if (mouse_state.buttons == 1 && x >= 795 && x <= 975)
                 {
-                    if (y >= 35 && y <= 110) {
+                    if (y >= 35 && y <= 110)
                         land = 21;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 22;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 23;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 24;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
                 else if (mouse_state.buttons == 1 && x >= 985 && x <= 1165)
                 {
-                    if (y >= 35 && y <= 110) {
+                    if (y >= 35 && y <= 110)
                         land = 25;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 26;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 27;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 28;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
+
                 if (land!=-1)
                 {
                     if (check_land_is_correct(land,turn)==1)
@@ -598,7 +598,6 @@ int main()
                         else if (Land_player[land]==GREEN)
                             green++;
                     }
-
                 }
 
 
@@ -669,105 +668,111 @@ int main()
                 y = event.mouse.y;
                 al_get_mouse_state(&mouse_state);
 
-                if (mouse_state.buttons == 1 && x >= 35 && x <= 215) {
+                if (mouse_state.buttons == 1 && x >= 35 && x <= 215)
+                {
                     if (y >= 35 && y <= 110)
                         land = 0;
-                    else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 1;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 2;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 3;
-                    } else if (y >= 375 && y <= 450) {
+                    else if (y >= 375 && y <= 450)
                         land = 4;
-                    } else if (y >= 460 && y <= 535) {
+                    else if (y >= 460 && y <= 535)
                         land = 5;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
-                else if (mouse_state.buttons == 1 && x >= 225 && x <= 405) {
+                else if (mouse_state.buttons == 1 && x >= 225 && x <= 405)
+                {
                     if (y >= 35 && y <= 110)
                         land = 6;
                     else if (y >= 120 && y <= 195)
                         land = 7;
                     else if (y >= 460 && y <= 535)
                         land = 8;
-                    else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
-                else if (mouse_state.buttons == 1 && x >= 415 && x <= 595) {
-                    if (y >= 35 && y <= 110) {
+                else if (mouse_state.buttons == 1 && x >= 415 && x <= 595)
+                {
+                    if (y >= 35 && y <= 110)
                         land = 9;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 10;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 11;
-                    } else if (y >= 375 && y <= 450) {
+                    else if (y >= 375 && y <= 450)
                         land = 12;
-                    } else if (y >= 460 && y <= 535) {
+                    else if (y >= 460 && y <= 535)
                         land = 13;
-                    } else if (y >= 545 && y <= 620) {
+                    else if (y >= 545 && y <= 620)
                         land = 14;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
-                else if (mouse_state.buttons == 1 && x >= 605 && x <= 785) {
-                    if (y >= 35 && y <= 110) {
+                else if (mouse_state.buttons == 1 && x >= 605 && x <= 785)
+                {
+                    if (y >= 35 && y <= 110)
                         land = 15;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 16;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 17;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 18;
-                    } else if (y >= 375 && y <= 450) {
+                    else if (y >= 375 && y <= 450)
                         land = 19;
-                    } else if (y >= 460 && y <= 535) {
+                    else if (y >= 460 && y <= 535)
                         land = 20;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
-                else if (mouse_state.buttons == 1 && x >= 795 && x <= 975) {
-                    if (y >= 35 && y <= 110) {
+                else if (mouse_state.buttons == 1 && x >= 795 && x <= 975)
+                {
+                    if (y >= 35 && y <= 110)
                         land = 21;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 22;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 23;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 24;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
-                else if (mouse_state.buttons == 1 && x >= 985 && x <= 1165) {
-                    if (y >= 35 && y <= 110) {
+                else if (mouse_state.buttons == 1 && x >= 985 && x <= 1165)
+                {
+                    if (y >= 35 && y <= 110)
                         land = 25;
-                    } else if (y >= 120 && y <= 195) {
+                    else if (y >= 120 && y <= 195)
                         land = 26;
-                    } else if (y >= 205 && y <= 280) {
+                    else if (y >= 205 && y <= 280)
                         land = 27;
-                    } else if (y >= 290 && y <= 365) {
+                    else if (y >= 290 && y <= 365)
                         land = 28;
-                    } else {
+                    else
+                    {
                         al_flip_display();
                         land = -1;
                     }
-
                 }
 
                 if (mouse_state.buttons == 1 && x >= 960 && x <= 1140)     // new key bottom
