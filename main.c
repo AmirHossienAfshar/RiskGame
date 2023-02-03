@@ -1,31 +1,31 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_image.h>
-#include <time.h>
-#include <stdlib.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
 enum Player {RED,BLUE,YELLOW,GREEN};
 
-void Draw_Land_Boarder(int land);
-void Primary_Rand(int );
-int land_position_x(int i);
-int land_position_y(int i);
+void Draw_Land_Boarder(int);
+void Primary_Rand(int);
+int land_position_x(int);
+int land_position_y(int);
 void soldier_display(void);
 void wrong_input(void);
-int whose_turn_is_it(int );
+int whose_turn_is_it(int);
 void primary_whose_turn_is_it(int);
-int check_land_is_correct(int ,int );
-void soldier_counter(int*, int* , int* , int* );
-void soldier_transition(int , int );
-void Risk(int , int );
-int defence_member_number(int );
-int attack_member_number(int );
-int which_land_is_near(int , int );
+int check_land_is_correct(int,int);
+void soldier_counter(int*,int*,int*,int*);
+void soldier_transition(int,int);
+void Risk(int,int);
+int defence_member_number(int);
+int attack_member_number(int);
+int which_land_is_near(int,int);
 void turn1(void);
 
 
@@ -63,8 +63,6 @@ int main()
     int R=1,B=1,Y=1,G=1;
     int flag=0;
 
-
-
     al_init();
     al_install_keyboard();
     al_install_mouse();
@@ -76,9 +74,6 @@ int main()
     al_install_audio();
     al_init_acodec_addon();
     al_reserve_samples(5);
-
-
-
 
     ALLEGRO_TIMER *timer = al_create_timer(1.0/fps);
     font1 = al_load_ttf_font("Oswald-Regular.ttf",24,0);
@@ -102,7 +97,7 @@ int main()
     for (i=0 ; i<29 ; i++)     // this place works as the soldiers without flags.
         Land_quantity[i]++;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     al_start_timer(timer);
     al_play_sample(test_sample,1,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
 
@@ -160,14 +155,14 @@ int main()
     }
     al_destroy_bitmap(bitmap1);
     al_destroy_sample(test_sample);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Primary_Rand(primary_numbers);
     done = true;
     al_start_timer(timer);
-    al_draw_bitmap(bitmap2, 0, 0, 0);  // has to exist;
+    al_draw_bitmap(bitmap2, 0, 0, 0);
     soldier_display();
     turn=whose_turn_is_it(land);
-    al_flip_display();                                    // has to exist;
+    al_flip_display();
     v=1;
 
     //777777777777777777777777777777777777777777
@@ -873,8 +868,8 @@ int main()
 
 void Draw_Land_Boarder(int land)
 {
-    //al_flip_display();
     int x,y;
+
     if (land==-2)
     {
         x = 960;
@@ -902,10 +897,7 @@ void Draw_Land_Boarder(int land)
             al_draw_textf(font1, al_map_rgb(255, 255, 255), 50, 695, 0, "LAND %d marked.", land);
         al_flip_display();
         al_play_sample(sample,1,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
-
     }
-
-
 }
 
 void soldier_display(void)
@@ -1031,7 +1023,6 @@ void turn1(void)
         Turn_counter=0;
     else
         Turn_counter++;
-
 }
 
 int whose_turn_is_it(int land)
