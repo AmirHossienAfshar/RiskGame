@@ -40,11 +40,11 @@ int Turn_counter=0;
 
 int main()
 {
-    int width = 1200;
-    int height = 800;
-    int fps = 30;
+    int width=1200;
+    int height=800;
+    int fps=30;
     int x,y;
-    bool done = true;
+    bool done=true;
     int n=1;
     int land=0;
     int i,j;
@@ -620,8 +620,8 @@ int main()
         }
         else if (turn==BLUE && blue>=blue_capacity && B==1)
         {
-            round = 1;
-            B = 0;
+            round=1;
+            B=0;
             al_flip_display();
             al_draw_bitmap(bitmap3, 0, 0, 0);
             al_draw_text(font1, al_map_rgb(255,255,255),50,655,0,"You can either ATTACK or MOVE your soldier."
@@ -643,14 +643,14 @@ int main()
         }
         else if (turn==GREEN && green>=green_capacity && G==1)
         {
-            round = 1;
-            G = 0;
+            round=1;
+            G=0;
             al_draw_bitmap(bitmap3, 0, 0, 0);
             al_draw_text(font1, al_map_rgb(255, 255, 255), 50, 655, 0, "You can either ATTACK or MOVE your soldier."
                                                                        " click next player when you are done.");
             primary_whose_turn_is_it(turn);
             al_flip_display();
-            situation = 0;
+            situation=0;
         }
 
 
@@ -794,18 +794,18 @@ int main()
 
                     if (situation == 1)
                     {
-                        if (check_land_is_correct(land, turn) == 1  && land!=-2)
+                        if (check_land_is_correct(land,turn)==1 && land!=-2)
                         {
                             land1 = land;
                             situation = 2;
-                            printf("\n****land1=%d,situation=%d\n", land, situation);
+                            //printf("\n****land1=%d,situation=%d\n", land, situation);
                         }
                     }
                     else if (situation == 2)
                     {
                         land2 = land;
                         situation = 1;
-                        printf("\n****land2=%d,situation=%d\n", land, situation);
+                        //printf("\n****land2=%d,situation=%d\n", land, situation);
                         if (Land_player[land1] == Land_player[land2])
                             soldier_transition(land2, land1);
                         else if (which_land_is_near(land1, land2) == 1)
@@ -1342,11 +1342,11 @@ int attack_member_number(int land1)
     int a;
     if (Land_quantity[land1]>=4)
         return 3;
-    else {
+    else
+    {
         a = Land_quantity[land1] - 1;
         return a;   // if 0 is returned , no attack happens , has to be dealt with in the outcome function;
     }
-
 }
 
 int defence_member_number(int land2)
