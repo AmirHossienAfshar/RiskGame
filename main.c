@@ -846,7 +846,7 @@ int main()
                         if (Land_player[land1] == Land_player[land2])
                             soldier_transition(land2, land1);
                         else if (which_land_is_near(land1, land2) == 1)
-                            Risk(land1, land2);
+                            Risk(land1,land2);
                         else
                         {
                             al_draw_text(font1, al_map_rgb(255, 255, 255), 280, 735, 0, "can not attack. "
@@ -1401,18 +1401,19 @@ void Risk(int land1, int land2)
 {
     int n1,n2;
     int temp;
+    int l=0,r=0;
     n1=attack_member_number(land1);
-    n2= defence_member_number(land2);
+    n2=defence_member_number(land2);
     int attack[n1], defence[n2], i, j;
 
     if (n1<=0)
     {
         al_draw_text (font1 , al_map_rgb(255,255,255), 280 , 735 , 0 , "Can not attack,"
-                                                                       " low soldiers at the selected land.");
+                                                                       " low soldiers numbers at the selected land.");
     }
     else
     {
-        al_draw_text(font1, al_map_rgb(255,255,255),260,735,0,"ATTACK and RISK! ");
+        al_draw_text(font1, al_map_rgb(255,255,255),260,735,0,"ATTACK and RISK Done! ");
 
         srand(time(0));
 
@@ -1435,7 +1436,7 @@ void Risk(int land1, int land2)
                 }
         }
 
-        for (i=0; i<n2 ; i++)                 // this loop orders the random numbers;
+        for (i=0 ; i<n2 ; i++)                 // this loop orders the random numbers;
         {
             for (j=i+1 ; j<n2 ; j++)
                 if (defence[i] < defence[j])
@@ -1445,25 +1446,38 @@ void Risk(int land1, int land2)
                     defence[j] = temp;
                 }
         }
-        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,attack[2]=%d,defend[0]=%d,defend[1]=%d", n1, n2, attack[0], attack[1], attack[2], defence[0], defence[1])
+        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,defend[0]=%d,defend[1]=%d\n", n1, n2, attack[0], attack[1], defence[0], defence[1])
                 ;
-        for (i=0 ; i<2 ; i++)
+        for (i=0 ; i<n2 ; i++)
         {
             if (attack[i] <= defence[i])
             {
                 //Land_quantity[land1]--;   // reduce soldier number from attacker
                 n1--;
+                l++;
             }
             else
-                Land_quantity[land2]--;   // reduce soldier number from defender
+            {
+                //Land_quantity[land2]--;   // reduce soldier number from defender
+                n2--;
+                r++;
+            }
         }
+        printf(",l=%d,r=%d",l,r);
 
-        if (Land_quantity[land2]<=0  && n1!=0)       // changing flag if the attacker wins.   /////////////////////////////////////////////////////////////
+        if (Land_quantity[land2]-r>0)
         {
-            Land_quantity[land2] = n1;
-            Land_quantity[land1] -= n1;
+            Land_quantity[land2]=Land_quantity[land2]-r;
+            Land_quantity[land1]=Land_quantity[land1]-l;
+        }
+        else
+        {
+            Land_quantity[land2]=n1;
+            Land_quantity[land1]-=n1;
             Land_player[land2] = Land_player[land1];
         }
+
+
     }
 
 
