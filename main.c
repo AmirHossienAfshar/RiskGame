@@ -27,6 +27,7 @@ int defence_member_number(int);
 int attack_member_number(int);
 int which_land_is_near(int,int);
 void turn1(void);
+int winner(void);
 
 
 ALLEGRO_FONT *font1;
@@ -47,7 +48,7 @@ int main()
     bool done=true;
     int n=1;
     int land=0;
-    int i,j;
+    int i,j,k;
     int v;
     int turn;
     int red,green,blue,yellow;
@@ -1609,3 +1610,68 @@ int which_land_is_near(int land1, int land2)
             break;
     }
 }       // works properly.
+
+int winner(void)
+{
+    int k;
+    int winner_red=0,winner_blue=0,winner_yellow=0,winner_green=0;
+    ///////////////////////////////
+    k=0;
+    while (k<29)
+    {
+        if (Land_player[k]==RED)
+        {
+            k++;
+            winner_red++;
+        }
+        else
+            break;
+    }
+    if (winner_red==29)
+        return RED;
+    ///////////////////////////////
+    k=0;
+    while (k<29)
+    {
+        if (Land_player[k]==BLUE)
+        {
+            k++;
+            winner_blue++;
+        }
+        else
+            break;
+    }
+    if (winner_blue==29)
+        return BLUE;
+    ///////////////////////////////
+    k=0;
+    while (k<29)
+    {
+        if (Land_player[k]==YELLOW)
+        {
+            k++;
+            winner_yellow++;
+        }
+        else
+            break;
+    }
+    if (winner_yellow==29)
+        return YELLOW;
+    ///////////////////////////////
+    k=0;
+    while (k<29)
+    {
+        if (Land_player[k]==GREEN)
+        {
+            k++;
+            winner_green++;
+        }
+        else
+            break;
+    }
+    if (winner_green==29)
+        return GREEN;
+    ///////////////////////////////
+
+
+}
