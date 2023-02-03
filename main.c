@@ -842,7 +842,6 @@ int main()
                     {
                         land2 = land;
                         situation = 1;
-                        //printf("\n****land2=%d,situation=%d\n", land, situation);
                         if (Land_player[land1] == Land_player[land2])
                             soldier_transition(land2, land1);
                         else if (which_land_is_near(land1, land2) == 1)
@@ -1413,7 +1412,7 @@ void Risk(int land1, int land2)
     }
     else
     {
-        al_draw_text(font1, al_map_rgb(255,255,255),260,735,0,"ATTACK and RISK Done! ");
+        al_draw_text(font1, al_map_rgb(255,255,255),260,735,0," ATTACK and RISK Done! ");
 
         srand(time(0));
 
@@ -1446,24 +1445,53 @@ void Risk(int land1, int land2)
                     defence[j] = temp;
                 }
         }
-        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,defend[0]=%d,defend[1]=%d\n", n1, n2, attack[0], attack[1], defence[0], defence[1])
-                ;
-        for (i=0 ; i<n2 ; i++)
+
+        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,defend[0]=%d,defend[1]=%d\n", n1, n2, attack[0], attack[1], defence[0], defence[1]);
+
+        if (n2==2)
         {
-            if (attack[i] <= defence[i])
+            for (i=0 ; i<2 ; i++)
             {
-                //Land_quantity[land1]--;   // reduce soldier number from attacker
-                n1--;
-                l++;
-            }
-            else
-            {
-                //Land_quantity[land2]--;   // reduce soldier number from defender
-                n2--;
-                r++;
+                printf("aaa\n");
+
+                if (attack[i] <= defence[i])
+                {
+                    n1--;
+                    l++;
+                    printf("&\n");
+
+                }
+                else
+                {
+                    n2--;
+                    r++;
+                    printf("$\n");
+                }
             }
         }
-        printf(",l=%d,r=%d",l,r);
+        else if (n2==1)
+        {
+            for (i=0 ; i<1 ; i++)
+            {
+                printf("aaa\n");
+
+                if (attack[i] <= defence[i])
+                {
+                    n1--;
+                    l++;
+                    printf("&\n");
+
+                }
+                else
+                {
+                    n2--;
+                    r++;
+                    printf("$\n");
+                }
+            }
+        }
+
+        printf(",l=%d,r=%d\n",l,r);
 
         if (Land_quantity[land2]-r>0)
         {
@@ -1662,7 +1690,7 @@ int which_land_is_near(int land1, int land2)
                 return 0;
             break;
     }
-}       // works properly.
+}
 
 int winner(void)
 {
