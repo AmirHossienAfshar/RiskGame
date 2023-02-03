@@ -427,34 +427,22 @@ int main()
         if (event.type == ALLEGRO_EVENT_TIMER && v == 1)
         {
             v = 0;
-            if (round==1)  // // it is late for one click anywhere
+            if (round==1)
             {
                 al_draw_bitmap(bitmap3, 0, 0, 0);
                 al_draw_text(font1, al_map_rgb(255,255,255),50,655,0,"You can either ATTACK or MOVE your soldier."
                                                                      " click next player when you are done.");
             }
-            else if (round==0)   // it is late for one click anywhere
+            else if (round==0)
             {
                 al_draw_bitmap(bitmap2, 0, 0, 0);
                 al_draw_text(font1, al_map_rgb(255,255,255),50,655,0,"Put your BONUS soldiers at one of your land.");
             }
 
             if (can_I_write_turn!=1)
-                primary_whose_turn_is_it(turn); ////// problem with next player. (solved looks like to be)
+                primary_whose_turn_is_it(turn);
             else
                 can_I_write_turn=0;
-
-            //printf("*\n");
-            //printf("situation=%d\n", situation);
-            //printf("red=%d,blue=%d,yellow=%d,green=%d,round=%d,turn=%d,turn_counter=%d", red, blue, yellow, green, round,turn,Turn_counter);
-            //printf("\n red_capacity=%d,blue_capasicy=%d,yellow_capasity=%d,green_capasity=%d",red_capacity,blue_capacity,yellow_capacity,green_capacity);
-
-            /*for (i=0 ; i<29 ; i++)
-            {
-                if (land[i]==RED)
-
-            }*/
-
         }
 
         if (ready_for_next_round==primary_numbers)
@@ -633,7 +621,7 @@ int main()
                                                                  " click next player when you are done.");
             primary_whose_turn_is_it(turn);
             al_flip_display();
-            situation=0;  // subhan allah : works properly.
+            situation=0;
 
         }
         else if (turn==BLUE && blue>=blue_capacity && B==1)
@@ -646,7 +634,7 @@ int main()
                                                                  " click next player when you are done.");
             primary_whose_turn_is_it(turn);
             al_flip_display();
-            situation=0;  // subhan allah : works properly.
+            situation=0;
         }
         else if (turn==YELLOW && yellow>=yellow_capacity && Y==1)
         {
@@ -657,7 +645,7 @@ int main()
                                                                  " click next player when you are done.");
             primary_whose_turn_is_it(turn);
             al_flip_display();
-            situation=0; // subhan allah : works properly.
+            situation=0;
         }
         else if (turn==GREEN && green>=green_capacity && G==1)
         {
@@ -668,7 +656,7 @@ int main()
                                                                        " click next player when you are done.");
             primary_whose_turn_is_it(turn);
             al_flip_display();
-            situation = 0;  // subhan allah : works properly.
+            situation = 0;
         }
 
 
@@ -798,9 +786,7 @@ int main()
                         can_I_write_turn=1; // makes the interference with primary_whose_turn_is_it solved.
                         round=0;
                         situation=1; // this makes them not use the first land of red and second land of blue.
-
-                        land = -2;     // is this one working properly? (solved) seems to be fine.
-                        // problem. (solved) : recognize this as a wrong input.
+                        land = -2;
                     }
 
                 if (land!=-1 && land!=-2)
@@ -822,7 +808,7 @@ int main()
                         printf("\n****land2=%d,situation=%d\n", land, situation);
                         if (Land_player[land1] == Land_player[land2])
                             soldier_transition(land2, land1);
-                        else if (which_land_is_near(land1, land2) == 1)   // works properly.
+                        else if (which_land_is_near(land1, land2) == 1)
                             Risk(land1, land2);
                         else
                         {
@@ -858,18 +844,13 @@ int main()
 
                 }
                 soldier_display();
-
-                if (situation==0) // subhan allah ! works properly.
+                if (situation==0)
                     situation=1;
-
 
             }
         }
-
-
         if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
             break;
-
 
     }
     //************************************************************************************************************
