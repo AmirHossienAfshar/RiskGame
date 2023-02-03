@@ -78,7 +78,7 @@ int main()
 
     ALLEGRO_TIMER *timer = al_create_timer(1.0/fps);
     font1 = al_load_ttf_font("Oswald-Regular.ttf",24,0);
-    ALLEGRO_FONT *font2 = al_create_builtin_font();
+    ALLEGRO_FONT *font2 = al_load_ttf_font("Oswald-Regular.ttf",50,0);
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     ALLEGRO_DISPLAY *display = al_create_display(width,height);
     ALLEGRO_EVENT event;
@@ -439,7 +439,42 @@ int main()
                 primary_whose_turn_is_it(turn);
             else
                 can_I_write_turn=0;
+
+            k=winner();
+            if (k==RED)
+            {
+                al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
+                al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"RED PLAYER WON!");
+                al_flip_display();
+                al_rest(3);
+                exit(1);
+            }
+            else if (k==BLUE)
+            {
+                al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
+                al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"BLUE PLAYER WON!");
+                al_flip_display();
+                al_rest(3);
+                exit(1);
+            }
+            else if (k==YELLOW)
+            {
+                al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
+                al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"YELLOW PLAYER WON!");
+                al_flip_display();
+                al_rest(3);
+                exit(1);
+            }
+            else if (k==GREEN)
+            {
+                al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
+                al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"GREEN PLAYER WON!");
+                al_flip_display();
+                al_rest(3);
+                exit(1);
+            }
         }
+
 
         if (ready_for_next_round==primary_numbers)
         {
@@ -1627,8 +1662,6 @@ int winner(void)
         else
             break;
     }
-    if (winner_red==29)
-        return RED;
     ///////////////////////////////
     k=0;
     while (k<29)
@@ -1641,8 +1674,6 @@ int winner(void)
         else
             break;
     }
-    if (winner_blue==29)
-        return BLUE;
     ///////////////////////////////
     k=0;
     while (k<29)
@@ -1655,8 +1686,6 @@ int winner(void)
         else
             break;
     }
-    if (winner_yellow==29)
-        return YELLOW;
     ///////////////////////////////
     k=0;
     while (k<29)
@@ -1669,9 +1698,15 @@ int winner(void)
         else
             break;
     }
-    if (winner_green==29)
-        return GREEN;
     ///////////////////////////////
-
-
+    if (winner_red==29)
+        return RED;
+    else if (winner_yellow==29)
+        return YELLOW;
+    else if (winner_blue==29)
+        return BLUE;
+    else if (winner_green==29)
+        return GREEN;
+    else
+        return -1;
 }
