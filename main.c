@@ -833,7 +833,9 @@ int main()
                         {
                             land1 = land;
                             situation = 2;
-                            //printf("\n****land1=%d,situation=%d\n", land, situation);
+                            al_draw_text(font1, al_map_rgb(255,255,255),205,695,0,"NOW mark the land that"
+                                                                                 " you want to move your soldiers or attack!");
+                            al_flip_display();
                         }
                     }
                     else if (situation == 2)
@@ -1363,12 +1365,12 @@ void soldier_transition(int land1, int land2)
                 Land_quantity[land1]++;
                 Land_quantity[land2]--;
 
-                al_draw_text(font1, al_map_rgb(255,255,255),280,735,0,"SOLDIER TRANSITION done.");
+                al_draw_text(font1, al_map_rgb(255,255,255),260,735,0,"SOLDIER TRANSITION done.");
 
             }
             else
             {
-                al_draw_text(font1,al_map_rgb(255,255,255),280,735,0,"This soldier transition can not be done."
+                al_draw_text(font1,al_map_rgb(255,255,255),260,735,0,"This soldier transition can not be done."
                                                                      " low soldier numbers.");
             }
         }
@@ -1410,7 +1412,7 @@ void Risk(int land1, int land2)
     }
     else
     {
-        al_draw_text(font1, al_map_rgb(255,255,255),280,735,0,"ATTACK and RISK! ");
+        al_draw_text(font1, al_map_rgb(255,255,255),260,735,0,"ATTACK and RISK! ");
 
         srand(time(0));
 
