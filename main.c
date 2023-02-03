@@ -23,7 +23,7 @@ int check_land_is_correct(int ,int );
 void soldier_counter(int*, int* , int* , int* );
 void soldier_transition(int , int );
 void Risk(int , int );
-int deffend_member_number(int );
+int defence_member_number(int );
 int attack_member_number(int );
 int which_land_is_near(int , int );
 void turn1(void);
@@ -924,8 +924,6 @@ void soldier_display(void)
             al_draw_textf(font1 , al_map_rgb(200,200,10),x[i],y[i],0,"%d",Land_quantity[i]);
         else if (Land_player[i]==BLUE)
             al_draw_textf(font1 , al_map_rgb(0,0,220),x[i],y[i],0,"%d",Land_quantity[i]);
-
-
     }
     al_flip_display();
 }
@@ -1062,9 +1060,7 @@ int whose_turn_is_it(int land)
         turn =-1;
 
 
-    //   if (land!=-1)   // what was this used to be work for?
     turn1();
-    //turn2(land);
     al_flip_display();
 
     return turn;
@@ -1180,7 +1176,7 @@ void Primary_Rand(int primary_numbers)
         Turn_counter=1; // blue player starts
     }
 
-}  // works properly.
+}
 
 int check_land_is_correct(int land, int turn)
 {
@@ -1215,13 +1211,10 @@ void soldier_counter(int *red, int *blue, int *yellow, int *green)
         else if (Land_player[i]==GREEN)
             g++;
     }
-
     *red += (r/3);
     *blue += (b/3);
     *yellow += (y/3);
     *green += (g/3);
-
-
     ///////////////////////////////////////////////////////////////////////
     r=0,b=0,y=0,g=0;
     for (i=0 ; i<=8 ; i++)                           //  america bonus
@@ -1329,9 +1322,7 @@ void soldier_counter(int *red, int *blue, int *yellow, int *green)
     if (g==8)
         *green+=4;
     ////////////////////////////////////////////////////////////////////////////
-
-
-}    // works properly.
+}
 
 void soldier_transition(int land1, int land2)
 {
@@ -1367,7 +1358,7 @@ int attack_member_number(int land1)
 
 }
 
-int deffend_member_number(int land2)
+int defence_member_number(int land2)
 {
     if (Land_quantity[land2]>=2)
         return 2;
@@ -1379,10 +1370,9 @@ void Risk(int land1, int land2)
 {
     int n1,n2;
     int temp;
-
     n1=attack_member_number(land1);
-    n2=deffend_member_number(land2);
-    int attack[n1], deffend[n2], i, j;
+    n2= defence_member_number(land2);
+    int attack[n1], defence[n2], i, j;
 
     if (n1<=0)
     {
@@ -1400,7 +1390,7 @@ void Risk(int land1, int land2)
             attack[i] = (rand() % 6) + 1;
 
         for (i=0 ; i<n2 ; i++)
-            deffend[i] = (rand() % 6) + 1;
+            defence[i] = (rand() % 6) + 1;
 
 
         for (i=0 ; i<n1 ; i++)                 // this loop orders the random numbers;
@@ -1417,24 +1407,24 @@ void Risk(int land1, int land2)
         for (i=0; i<n2 ; i++)                 // this loop orders the random numbers;
         {
             for (j=i+1 ; j<n2 ; j++)
-                if (deffend[i] < deffend[j])
+                if (defence[i] < defence[j])
                 {
-                    temp = deffend[i];
-                    deffend[i] = deffend[j];
-                    deffend[j] = temp;
+                    temp = defence[i];
+                    defence[i] = defence[j];
+                    defence[j] = temp;
                 }
         }
-        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,attack[2]=%d,diffend[0]=%d,diffend[1]=%d",n1,n2,attack[0],attack[1],attack[2],deffend[0],deffend[1])
+        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,attack[2]=%d,defend[0]=%d,defend[1]=%d", n1, n2, attack[0], attack[1], attack[2], defence[0], defence[1])
                 ;
         for (i=0 ; i<2 ; i++)
         {
-            if (attack[i] <= deffend[i])
+            if (attack[i] <= defence[i])
             {
                 //Land_quantity[land1]--;   // reduce soldier number from attacker
                 n1--;
             }
             else
-                Land_quantity[land2]--;   // reduce soldier number from deffender
+                Land_quantity[land2]--;   // reduce soldier number from defender
         }
 
         if (Land_quantity[land2]<=0  && n1!=0)       // changing flag if the attacker wins.   /////////////////////////////////////////////////////////////
