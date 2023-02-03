@@ -78,7 +78,7 @@ int main()
 
     ALLEGRO_TIMER *timer = al_create_timer(1.0/fps);
     font1 = al_load_ttf_font("Oswald-Regular.ttf",24,0);
-    ALLEGRO_FONT *font2 = al_load_ttf_font("Oswald-Regular.ttf",50,0);
+    ALLEGRO_FONT *font2 = al_load_ttf_font("Oswald-Regular.ttf",100,0);
     ALLEGRO_EVENT_QUEUE *queue = al_create_event_queue();
     ALLEGRO_DISPLAY *display = al_create_display(width,height);
     ALLEGRO_EVENT event;
@@ -446,7 +446,7 @@ int main()
                 al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
                 al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"RED PLAYER WON!");
                 al_flip_display();
-                al_rest(3);
+                al_rest(4);
                 exit(1);
             }
             else if (k==BLUE)
@@ -454,7 +454,7 @@ int main()
                 al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
                 al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"BLUE PLAYER WON!");
                 al_flip_display();
-                al_rest(3);
+                al_rest(4);
                 exit(1);
             }
             else if (k==YELLOW)
@@ -462,7 +462,7 @@ int main()
                 al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
                 al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"YELLOW PLAYER WON!");
                 al_flip_display();
-                al_rest(3);
+                al_rest(4);
                 exit(1);
             }
             else if (k==GREEN)
@@ -470,7 +470,7 @@ int main()
                 al_draw_filled_rectangle(20,20,1180,635, al_map_rgb(165,45,0));
                 al_draw_text(font2, al_map_rgb(255,255,255),50,50,0,"GREEN PLAYER WON!");
                 al_flip_display();
-                al_rest(3);
+                al_rest(4);
                 exit(1);
             }
         }
@@ -652,7 +652,6 @@ int main()
             primary_whose_turn_is_it(turn);
             al_flip_display();
             situation=0;
-
         }
         else if (turn==BLUE && blue>=blue_capacity && B==1)
         {
@@ -898,6 +897,7 @@ int main()
     al_destroy_display(display);
     al_destroy_timer(timer);
     al_destroy_font(font1);
+    al_destroy_font(font2);
 }
 
 
@@ -930,7 +930,9 @@ void Draw_Land_Boarder(int land)
     {
         al_draw_rectangle(x, y, x + 180, y + 75, al_map_rgb(0, 0, 0), 3);
         if (land!=-2)
+        {
             al_draw_textf(font1, al_map_rgb(255, 255, 255), 50, 695, 0, "LAND %d marked.", land);
+        }
         al_flip_display();
         al_play_sample(sample,1,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
     }
