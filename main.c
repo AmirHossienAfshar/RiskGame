@@ -28,6 +28,7 @@ int attack_member_number(int);
 int which_land_is_near(int,int);
 void turn1(void);
 int winner(void);
+void looser(void);
 
 
 ALLEGRO_FONT *font1;
@@ -102,7 +103,7 @@ int main()
     al_start_timer(timer);
     al_play_sample(test_sample,1,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
 
-    while (done)                // the menu
+    while (done)  // the menu
     {
 
         al_wait_for_event(queue , &event);
@@ -473,6 +474,8 @@ int main()
                 al_rest(4);
                 exit(1);
             }
+
+
         }
 
 
@@ -869,6 +872,7 @@ int main()
                     }
                     else
                         Draw_Land_Boarder(land);
+
                     al_flip_display();
                     v = 1;
                 }
@@ -883,6 +887,7 @@ int main()
                 if (situation==0)
                     situation=1;
 
+                //looser();                     has problem.
             }
         }
         if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -891,7 +896,6 @@ int main()
     }
     //************************************************************************************************************
 
-
     al_destroy_sample(sample);
     al_destroy_bitmap(bitmap2);
     al_destroy_bitmap(bitmap3);
@@ -899,6 +903,7 @@ int main()
     al_destroy_timer(timer);
     al_destroy_font(font1);
     al_destroy_font(font2);
+
 }
 
 
@@ -1504,8 +1509,6 @@ void Risk(int land1, int land2)
             Land_quantity[land1]-=n1;
             Land_player[land2] = Land_player[land1];
         }
-
-
     }
 
 
@@ -1695,6 +1698,7 @@ int which_land_is_near(int land1, int land2)
 int winner(void)
 {
     int k;
+    int a;
     int winner_red=0,winner_blue=0,winner_yellow=0,winner_green=0;
     ///////////////////////////////
     k=0;
@@ -1722,28 +1726,30 @@ int winner(void)
     }
     ///////////////////////////////
     k=0;
-    while (k<29)
-    {
-        if (Land_player[k]==YELLOW)
+    if (primary_numbers==3 || primary_numbers==4)
+        while (k<29)
         {
-            k++;
-            winner_yellow++;
+            if (Land_player[k]==YELLOW)
+            {
+                k++;
+                winner_yellow++;
+            }
+            else
+                break;
         }
-        else
-            break;
-    }
     ///////////////////////////////
     k=0;
-    while (k<29)
-    {
-        if (Land_player[k]==GREEN)
+    if (primary_numbers==4)
+        while (k<29)
         {
-            k++;
-            winner_green++;
+            if (Land_player[k]==GREEN)
+            {
+                k++;
+                winner_green++;
+            }
+            else
+                break;
         }
-        else
-            break;
-    }
     ///////////////////////////////
     if (winner_red==29)
         return RED;
@@ -1755,4 +1761,123 @@ int winner(void)
         return GREEN;
     else
         return -1;
+}
+
+void looser(void)
+{
+    int k;
+    int a;
+    int winner_red=0,winner_blue=0,winner_yellow=0,winner_green=0;
+    ///////////////////////////////
+    k=0;
+    while (k<29)
+    {
+        if (Land_player[k]!=RED)
+        {
+            k++;
+            winner_red++;
+        }
+        else
+            break;
+    }
+    ///////////////////////////////
+    k=0;
+    while (k<29)
+    {
+        if (Land_player[k]!=BLUE)
+        {
+            k++;
+            winner_blue++;
+        }
+        else
+            break;
+    }
+    ///////////////////////////////
+    k=0;
+    if (primary_numbers==3 || primary_numbers==4)
+        while (k<29)
+        {
+            if (Land_player[k]!=YELLOW)
+            {
+                k++;
+                winner_yellow++;
+            }
+            else
+                break;
+        }
+    ///////////////////////////////
+    k=0;
+    if (primary_numbers==4)
+    {
+        while (k<29)
+        {
+            if (Land_player[k]!=GREEN)
+            {
+                k++;
+                winner_green++;
+            }
+            else
+                break;
+        }
+    }
+
+
+
+    if (primary_numbers==4)
+    {
+        if (winner_red==0)
+        {
+            a=whose_turn_is_it(1);
+            //return -1;
+        }
+        if (winner_blue==0)
+        {
+            a=whose_turn_is_it(1);
+            //return -1;
+        }
+        if (winner_yellow==0)
+        {
+            a=whose_turn_is_it(1);
+            //return -1;
+        }
+        if (winner_green==0)
+        {
+            a=whose_turn_is_it(1);
+           // return -1;
+        }
+    }
+    else if (primary_numbers==3)
+    {
+        if (winner_red == 29)
+        {
+            primary_numbers--;
+            printf("haaaaaaaaaRED");
+        }
+        if (winner_blue == 29)
+        {
+            primary_numbers--;
+            printf("haaaaaaaaaBLUE");
+
+        }
+        if (winner_yellow == 29)
+        {
+            turn1();
+            printf("haaaaaaaaaYELLOW");
+        }
+    }
+    else if (primary_numbers==2)
+    {
+        if (winner_red==0)
+        {
+            a=whose_turn_is_it(1);
+        }
+        if (winner_blue==0)
+        {
+            a=whose_turn_is_it(1);
+           // return -1;
+
+        }
+    }
+
+
 }
