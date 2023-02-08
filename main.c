@@ -29,6 +29,7 @@ int which_land_is_near(int,int);
 void turn1(void);
 int winner(void);
 void looser(void);
+int looser2(int color);
 
 
 ALLEGRO_FONT *font1;
@@ -64,6 +65,8 @@ int main()
     int ready_for_next_round=0;
     int R=1,B=1,Y=1,G=1;
     int flag=0;
+    int former_red,former_blue,former_green,former_yellow;
+    int flagR,flagB,flagY,flagG;
 
     al_init();
     al_install_keyboard();
@@ -100,6 +103,7 @@ int main()
         Land_quantity[i]++;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     al_start_timer(timer);
     al_play_sample(test_sample,1,0,1,ALLEGRO_PLAYMODE_ONCE,NULL);
 
@@ -169,7 +173,7 @@ int main()
 
     //777777777777777777777777777777777777777777
 
-    printf("%d\n",primary_numbers);
+    //printf("%d\n",primary_numbers);
     if (primary_numbers==2)   // the use of capacity is to know how much soldiers we need at the beginning.
     {
         red_capacity = 30;
@@ -394,15 +398,11 @@ int main()
         }
         //99999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 
-
         if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
             exit(1);
 
-
-        //printf("%d",turn);
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     al_draw_bitmap(bitmap2,0,0,0);
     soldier_display();
@@ -413,6 +413,7 @@ int main()
     al_flip_display();
     round=0;
     can_I_count=1;
+
 
     //************************************************************************************************************
     while (1) // the game:
@@ -490,13 +491,119 @@ int main()
 
         if (can_I_count == 1)
         {
+  /*          former_blue=blue_capacity;
+            former_green=green_capacity;
+            former_red=red_capacity;
+            former_yellow=yellow_capacity;
+
+            flagR=1;
+            flagB=1;
+            flagY=1;
+            flagG=1;
+*/
             soldier_counter(&red_capacity,&blue_capacity,&yellow_capacity,&green_capacity);
             can_I_count=0;
             R=1;
             B=1;
             Y=1;
             G=1;
+
+            printf("redbonus=%d,yellowbonus=%d,bluebonus=%d\n",former_red-red_capacity,former_yellow-yellow_capacity,former_blue-blue_capacity);
         }
+
+ /*       if (primary_numbers==3)
+        {
+            ////////////////////////////////////////123456789///////////////////////////////////////////////
+            // note : blue works. yellow does not. red doesn't!
+            if (former_red==red_capacity && flagR==1)
+            {
+                if (looser2(RED)==1)
+                {
+                    ready_for_next_round++;
+                    //turn = whose_turn_is_it(land);
+                    Turn_counter=1;
+                    //primary_whose_turn_is_it(land);
+                    al_draw_text(font1, al_map_rgb(255, 255, 255), 50, 735, 0, "It is blue player's turn.");
+                    soldier_display(); // check needed
+                    al_flip_display();
+                    flagR=0;
+
+                    printf("hello there!RED\n");
+                }
+            }
+            if (former_blue==blue_capacity && flagB==1)// important fact : may have 2 lands but no bonus!!!
+            {
+                if (looser2(BLUE)==1)
+                {
+                    ready_for_next_round++; // exactly like when the player pushes the "next player" bottom.
+                    //turn = whose_turn_is_it(land);
+                    flagB=0;
+                    Turn_counter=2;     /// test this ...
+                    //primary_whose_turn_is_it(land);
+                    al_flip_display();
+                    al_draw_text(font1, al_map_rgb(255, 255, 255), 50, 735, 0, "It is yellow player's turn.");
+
+                    soldier_display(); // check needed
+                    al_flip_display();
+
+                    printf("hello there!BLUE\n");
+                }
+            }
+            if (former_yellow==yellow_capacity && flagY==1)
+            {
+                if (looser2(YELLOW)==1)
+                {
+                    ready_for_next_round++;
+                    //turn = whose_turn_is_it(land);
+                    flagY=0;
+                    Turn_counter=0;
+                    //primary_whose_turn_is_it(land);
+                    al_draw_text(font1, al_map_rgb(255, 255, 255), 50, 735, 0, "It is yellow player's turn.");
+
+                    soldier_display(); // check needed doesn't work
+                    al_flip_display();
+                    printf("hello there!YELLOW\n");
+                }
+            }
+        }
+
+        if (primary_numbers==4)
+        {
+            if (former_blue==blue_capacity && flagB==1)
+            {
+                //turn = whose_turn_is_it(land);
+                flagB=0;
+                ready_for_next_round++;
+                printf("hello there!\n");
+
+
+            }
+            if (former_red==red_capacity && flagR==1)
+            {
+                //turn = whose_turn_is_it(land);
+                flagR=0;
+                ready_for_next_round++;
+                printf("hello there!\n");
+
+            }
+            if (former_yellow==yellow_capacity && flagY==1)
+            {
+                //turn = whose_turn_is_it(land);
+                flagY=0;
+                ready_for_next_round++;
+                printf("hello there!\n");
+
+            }
+            if (former_green==green_capacity && flagG==1)
+            {
+                //turn = whose_turn_is_it(land);
+                flagG=0;
+                ready_for_next_round++;
+                printf("hello there!\n");
+
+            }
+        }
+*/
 
         if (round == 0)
         {
@@ -819,7 +926,7 @@ int main()
                         soldier_display();
                         ready_for_next_round++;
                         turn = whose_turn_is_it(land);
-                        al_flip_display();
+                        //al_flip_display();
 
                         can_I_write_turn=1; // makes the interference with primary_whose_turn_is_it solved.
                         round=0;
@@ -1224,7 +1331,7 @@ int check_land_is_correct(int land, int turn)
         return 1;
 }
 
-void soldier_counter(int *red, int *blue, int *yellow, int *green)
+void soldier_counter(int *red, int *blue, int *yellow, int *green)   // may have some problems,
 {
 
     int a,n,i;
@@ -1265,11 +1372,11 @@ void soldier_counter(int *red, int *blue, int *yellow, int *green)
     }
     if (r==9)
         *red+=3;
-    if (b==9)
+    else if (b==9)
         *blue+=3;
-    if (y==9)
+    else if (y==9)
         *yellow+=3;
-    if (g==9)
+    else if (g==9)
         *green+=3;
     ///////////////////////////////////////////////////////////////////////
     r=0,b=0,y=0,g=0;
@@ -1297,11 +1404,11 @@ void soldier_counter(int *red, int *blue, int *yellow, int *green)
     }
     if (r==6)
         *red+=4;
-    if (b==6)
+    else if (b==6)
         *blue+=4;
-    if (y==6)
+    else if (y==6)
         *yellow+=4;
-    if (g==6)
+    else if (g==6)
         *green+=4;
     ///////////////////////////////////////////////////////////////////////
     r=0,b=0,y=0,g=0;
@@ -1329,11 +1436,11 @@ void soldier_counter(int *red, int *blue, int *yellow, int *green)
     }
     if (r==6)
         *red+=2;
-    if (b==6)
+    else if (b==6)
         *blue+=2;
-    if (y==6)
+    else if (y==6)
         *yellow+=2;
-    if (g==6)
+    else if (g==6)
         *green+=2;
     ///////////////////////////////////////////////////////////////////////////
     r=0,b=0,y=0,g=0;
@@ -1350,11 +1457,11 @@ void soldier_counter(int *red, int *blue, int *yellow, int *green)
     }
     if (r==8)
         *red+=4;
-    if (b==8)
+    else if (b==8)
         *blue+=4;
-    if (y==8)
+    else if (y==8)
         *yellow+=4;
-    if (g==8)
+    else if (g==8)
         *green+=4;
     ////////////////////////////////////////////////////////////////////////////
 }
@@ -1451,26 +1558,26 @@ void Risk(int land1, int land2)
                 }
         }
 
-        printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,defend[0]=%d,defend[1]=%d\n", n1, n2, attack[0], attack[1], defence[0], defence[1]);
+        //printf("n1=%d,n2=%d,attack[0]=%d,attack[1]=%d,defend[0]=%d,defend[1]=%d\n", n1, n2, attack[0], attack[1], defence[0], defence[1]);
 
         if (n2==2)
         {
             for (i=0 ; i<2 ; i++)
             {
-                printf("aaa\n");
+                //printf("aaa\n");
 
                 if (attack[i] <= defence[i])
                 {
                     n1--;
                     l++;
-                    printf("&\n");
+                    //printf("&\n");
 
                 }
                 else
                 {
                     n2--;
                     r++;
-                    printf("$\n");
+                    //printf("$\n");
                 }
             }
         }
@@ -1478,25 +1585,25 @@ void Risk(int land1, int land2)
         {
             for (i=0 ; i<1 ; i++)
             {
-                printf("aaa\n");
+                //printf("aaa\n");
 
                 if (attack[i] <= defence[i])
                 {
                     n1--;
                     l++;
-                    printf("&\n");
+                    //printf("&\n");
 
                 }
                 else
                 {
                     n2--;
                     r++;
-                    printf("$\n");
+                    //printf("$\n");
                 }
             }
         }
 
-        printf(",l=%d,r=%d\n",l,r);
+        //printf(",l=%d,r=%d\n",l,r);
 
         if (Land_quantity[land2]-r>0)
         {
@@ -1767,7 +1874,7 @@ void looser(void)
 {
     int k;
     int a;
-    int winner_red=0,winner_blue=0,winner_yellow=0,winner_green=0;
+    int looser_red=0,looser_blue=0,looser_yellow=0,looser_green=0;
     ///////////////////////////////
     k=0;
     while (k<29)
@@ -1775,7 +1882,7 @@ void looser(void)
         if (Land_player[k]!=RED)
         {
             k++;
-            winner_red++;
+            looser_red++;
         }
         else
             break;
@@ -1787,7 +1894,7 @@ void looser(void)
         if (Land_player[k]!=BLUE)
         {
             k++;
-            winner_blue++;
+            looser_blue++;
         }
         else
             break;
@@ -1800,7 +1907,7 @@ void looser(void)
             if (Land_player[k]!=YELLOW)
             {
                 k++;
-                winner_yellow++;
+                looser_yellow++;
             }
             else
                 break;
@@ -1814,7 +1921,7 @@ void looser(void)
             if (Land_player[k]!=GREEN)
             {
                 k++;
-                winner_green++;
+                looser_green++;
             }
             else
                 break;
@@ -1825,22 +1932,22 @@ void looser(void)
 
     if (primary_numbers==4)
     {
-        if (winner_red==0)
+        if (looser_red==0)
         {
             a=whose_turn_is_it(1);
             //return -1;
         }
-        if (winner_blue==0)
+        if (looser_blue==0)
         {
             a=whose_turn_is_it(1);
             //return -1;
         }
-        if (winner_yellow==0)
+        if (looser_yellow==0)
         {
             a=whose_turn_is_it(1);
             //return -1;
         }
-        if (winner_green==0)
+        if (looser_green==0)
         {
             a=whose_turn_is_it(1);
            // return -1;
@@ -1848,36 +1955,45 @@ void looser(void)
     }
     else if (primary_numbers==3)
     {
-        if (winner_red == 29)
+        if (looser_red == 29)
         {
             primary_numbers--;
             printf("haaaaaaaaaRED");
         }
-        if (winner_blue == 29)
+        if (looser_blue == 29)
         {
             primary_numbers--;
             printf("haaaaaaaaaBLUE");
 
         }
-        if (winner_yellow == 29)
+        if (looser_yellow == 29)
         {
             turn1();
             printf("haaaaaaaaaYELLOW");
         }
     }
-    else if (primary_numbers==2)
-    {
-        if (winner_red==0)
-        {
-            a=whose_turn_is_it(1);
-        }
-        if (winner_blue==0)
-        {
-            a=whose_turn_is_it(1);
-           // return -1;
 
+}
+
+int looser2(int color)
+{
+    int k=0;
+    int looser=0;
+
+    while (k<29)
+    {
+        if (Land_player[k]!=color)
+        {
+            k++;
+            looser++;
         }
+        else
+            break;
     }
 
+    if (looser==29)
+        return 1;
+    else
+        return 0;
 
 }
