@@ -53,7 +53,6 @@ int main()
     int red,green,blue,yellow;
     int red_capacity,green_capacity,yellow_capacity,blue_capacity;
     int key=0;
-    int DoIt=1;
     int can_I_write_turn=0;
     int round=0;
     int can_I_count=1;
@@ -215,12 +214,8 @@ int main()
             al_draw_bitmap(bitmap2, 0, 0, 0);
             al_draw_text(font1, al_map_rgb(255,255,255),50,655,0,"Put your soldiers at one of your land.");
         }
-        DoIt=1;
-
         //////////////////////////////////////////////////////////////  works as land selection
-        while (DoIt)
-        {
-            if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
+        if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
             {
                 x = event.mouse.x;
                 y = event.mouse.y;
@@ -368,11 +363,6 @@ int main()
                     al_flip_display();
                 }
             }
-
-
-            DoIt=0;
-
-        }
         //////////////////////////////////////////////////////////////  works as land selection
 
         //9999999999999999999999999999999999999999999999999999999999999999999999999999999999999
