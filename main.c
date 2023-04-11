@@ -215,6 +215,7 @@ int main()
             al_draw_text(font1, al_map_rgb(255,255,255),50,655,0,"Put your soldiers at one of your land.");
         }
         //////////////////////////////////////////////////////////////  works as land selection
+        
         if (event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
             {
                 x = event.mouse.x;
